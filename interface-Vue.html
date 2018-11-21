@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="stylesheet" href="stylesheet.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.5/vue.min.js"></script>
+	<script src="arrayclass.js"></script>
+	<title>interface</title>
+</head>
+<body>
+	<div id= "task1">
+	  <h1 >Correlation and Regression Test</h1>
+	  <div>
+	  <p>please input the file </p>
+	  <input type="file" class="btn btn-outline-success" @change="onFileChange">
+	</div>
+	  <div>
+	  <p>Calculate Correlation</p>
+	  <button class="btn btn-success" @click="CalculateCor">Calculate Correlation</button>
+	 </div>
+	  <div>
+	  <p>Calculate regression</p>
+	  <button class="btn btn-info"  @click="CalculateReg">Calculate Regression</button>
+	 </div>
+	  <br>
+	  <br>
+	  <p>xArray is </p>
+	  <div class="alert alert-success">
+	  {{XArr}}
+	  </div>
+	  <P>yArray is </p>
+	  <div class="alert alert-success">
+	  {{YArr}}
+	  </div>
+	  <p>Correlation</p>
+		<div class="alert alert-success">
+	   {{Correlation}}	
+	  </div>
+	  <p>Regression</p>
+	  <div class="alert alert-success"> 
+	  {{Regression}}
+	  </div>
+
+</body>
+</html>
+<script>
+	var app1 = new Vue({
+	el :'#task1',
+	data:{
+		XArr:'',
+		YArr:'',
+		Correlation:' ' ,
+		Regression:' ',
+		myCorrelation: new Correlation(),
+		myRegression: new Regression()
+
+	},
+	methods: {
+	onFileChange(e){
+		let files = e.target.files ||e.dataTrabsfer.files;
+		if (!files.length)return;
+		this.XArr = files[0]
+
+		this.loadNumbers(files[0])
+		//this.loadNumber(files[0],true);
+		//this.display =true;
+		},
+		loadNumbers(file) {
+	      let reader = new FileReader();
+	      //console.log(reader)
+	      let vm = this;
+
+	      reader.onload = e => {
+	        //console.log(e.target.result)
+	        let tempString = e.target.result.split('\n');
+
+	        //console.log(tempString[0])
+	        //console.log(tempString[1])
+	        //this.Regression = tempString[0].split(',')
+	        //this.Correlation = tempString[1].split(',')
+
+	        //this.myCorrelation.setArray(tempString[0].split(','),true)
+	        //this.myCorrelation.setArray(tempString[1].split(','),false)
+			this.myCorrelation.setArray(tempString[0],true)
+	        this.myCorrelation.setArray(tempString[1],false)
+			this.myRegression.setArray(tempString[0].split(','),true)
+	        this.myRegression.setArray(tempString[1].split(','),false)
+			
+	        this.XArr = this.myCorrelation.x
+	        this.YArr = this.myCorrelation.y
+
+
+	      };
+	      reader.readAsText(file);
+	    },
+		CalculateCor(){
+			this.Correlation = this.myCorrelation.mulFunction();
+		},
+
+	CalculateReg(){
+		this.Regression = this.myRegression.mulFunction();
+			
+
+	}
+
+}
+
+
+
+	
+
+
+
+
+	})
+
+
+
+
+
+
+
+
+
+</script>
