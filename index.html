@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<head>
+  <title>corralation</title>
+</head>
+
+<body>
+	<p> use 'console 'to see the outcome </p>
+  <script src="arrayclass.js">
+  </script>
+  <script>
+	console.log('testing')
+	let corralationTest = new Correlation ()
+	 corralationTest.setArray([83,116,186,81,114], true)
+     corralationTest.setArray([11.2,9.3,21.6,6.9,10.2], false)
+     corralationTest.displaySum()
+	console.log('xArray is '+ corralationTest.x  ) 
+	console.log('yArray is '+ corralationTest.y )
+	console.log('sumX is '+ corralationTest.sumX )
+	console.log('sumY is '+ corralationTest.sumY )
+	console.log('n is '+ corralationTest.caculateN())
+	console.log('the squre x ='+ corralationTest.squreX ())
+	console.log('the squre y ='+ corralationTest.squreY())
+	console.log('x*y = ' + corralationTest.multi ())
+	console.log('the others is ' + corralationTest.mulFunction())
+	console.log('testing regression')
+	let regressionTest = new Regression()
+	regressionTest.setArray([130,650,99,150,128,302,95,945,368,961], true)
+	regressionTest.setArray([186,699,132,272,291,331,199,1890,788,1601], false)
+	console.log('n is ' + regressionTest.caculateN())
+	console.log ('average x is ' +regressionTest.calAvgX() )
+	console.log('average y is ' + regressionTest.calAvgY() )
+	console.log('beta1 is ' + regressionTest.calBeta1())
+	console.log('beta0 is ' + regressionTest.calbeta0())
+	console.log('the formula is ' + 'Y = ' + regressionTest.calbeta0()+'x+' +regressionTest.calBeta1())
+  </script>
+</body>
+</html>
